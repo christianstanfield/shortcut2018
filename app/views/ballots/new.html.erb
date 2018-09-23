@@ -1,0 +1,40 @@
+<div class="container">
+  <h3>Enter your code to cast your ballot</h3>
+
+  <%= form_with(model: @ballot, local: true) do |form| %>
+    <% if @ballot.errors.any? %>
+      <div class="alert alert-danger" role="alert">
+        <h3><%= pluralize(@ballot.errors.count, "error") %> prohibited this ballot from being submitted:</h3>
+
+        <ul>
+        <% @ballot.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="form-group row">
+      <%= form.label :code, class: "col-sm-2 col-form-label" %>
+      <div class="col-sm-10">
+        <%= form.text_field :code, id: :ballot_code, class: 'form-control' %>
+      </div>
+    </div>
+
+    <% Award.all.each do |award| %>
+      <h3><%= "#{award.name} Award" %></h3>
+      <h6><%= "(Select #{award.selectable_options})" %></h6>
+
+      <%= form.fields_for :votes_attributes do |vote_form| %>
+        <% award.considered_films.each do |film| %>
+          <div class="form-check">
+            <%= vote_form.check_box "award_#{award.id}-film_#{film.id}", class: 'form-check-input' %>
+            <%= vote_form.label "award_#{award.id}-film_#{film.id}", film.name, class: "form-check-label" %>
+          </div>
+        <% end %>
+      <% end %>
+    <% end %>
+
+    <button type="submit" class="btn btn-danger mb-2">Cast your vote</button>
+  <% end %>
+<div>

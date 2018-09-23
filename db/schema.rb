@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180914204904) do
+ActiveRecord::Schema.define(version: 20180923203904) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,6 +26,21 @@ ActiveRecord::Schema.define(version: 20180914204904) do
     t.boolean "voted"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "codes", force: :cascade do |t|
+    t.string "value"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "considerations", force: :cascade do |t|
+    t.bigint "film_id"
+    t.bigint "award_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["award_id"], name: "index_considerations_on_award_id"
+    t.index ["film_id"], name: "index_considerations_on_film_id"
   end
 
   create_table "films", force: :cascade do |t|
@@ -45,6 +60,8 @@ ActiveRecord::Schema.define(version: 20180914204904) do
     t.index ["film_id"], name: "index_votes_on_film_id"
   end
 
+  add_foreign_key "considerations", "awards"
+  add_foreign_key "considerations", "films"
   add_foreign_key "votes", "awards"
   add_foreign_key "votes", "ballots"
   add_foreign_key "votes", "films"

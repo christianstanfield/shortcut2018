@@ -1,0 +1,18 @@
+<% if notice %>
+  <div class="alert alert-success" role="alert">
+    <h3 id="notice"><%= notice %></h3>
+  </div>
+<% end %>
+
+<div class="container">
+  <h3>Ballot: <%= @ballot.code %></h3>
+
+  <h3>Votes:</h3>
+  <% @ballot.votes.group_by(&:award).each do |award, votes| %>
+    <h5><%= "#{award.name} Award" %></h5>
+
+    <% votes.each do |vote| %>
+      <p><%= "#{vote.film.name}" %></p>
+    <% end %>
+  <% end %>
+</div>
