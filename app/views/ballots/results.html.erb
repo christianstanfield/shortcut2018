@@ -1,0 +1,11 @@
+<div class="container">
+  <h3>Voting Results</h3>
+
+  <% @votes.group_by(&:award_name).each do |award_name, votes| %>
+    <h3><%= "#{award_name} Award" %></h3>
+
+    <% votes.each do |vote| %>
+    <p><%= "#{vote.count} - #{vote.film_name}" %></p>
+    <% end %>
+  <% end %>
+</div>

@@ -1,7 +1,10 @@
 class BallotsController < ApplicationController
 
+  http_basic_authenticate_with name: 'cs', password: 'tacos4ever', only: :results
+
   def new
     @ballot = Ballot.new
+    @awards = Award.all.includes(:considered_films)
   end
 
   def create
@@ -11,12 +14,17 @@ class BallotsController < ApplicationController
     if @ballot.save
       redirect_to @ballot, notice: 'Ballot was successfully submitted.'
     else
+      @awards = Award.all.includes(:considered_films)
       render :new
     end
   end
 
   def show
     @ballot = Ballot.find(params[:id])
+  end
+
+  def results
+    @votes = Vote.with_films_and_awards
   end
 
   private

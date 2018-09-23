@@ -3,5 +3,7 @@ Rails.application.routes.draw do
 
   root 'ballots#new'
 
-  resources :ballots, only: [:new, :create, :show]
+  resources :ballots, only: [:new, :create, :show] do
+    get :results, on: :collection
+  end
 end

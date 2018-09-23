@@ -21,7 +21,7 @@
       </div>
     </div>
 
-    <% Award.all.each do |award| %>
+    <% @awards.each do |award| %>
       <h3><%= "#{award.name} Award" %></h3>
       <h6><%= "(Select #{award.selectable_options})" %></h6>
 
