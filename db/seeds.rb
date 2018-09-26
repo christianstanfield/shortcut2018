@@ -6,6 +6,13 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
+Consideration.delete_all
+Vote.delete_all
+Award.delete_all
+Film.delete_all
+Code.delete_all
+Ballot.delete_all
+
 [Award::CHICAGO, Award::FEMALE, Award::AUDIENCE].each do |award_name|
   Award.create! name: award_name
 end
@@ -41,6 +48,6 @@ Film.all.each do |film|
   film.considered_awards << audience
 end
 
-100.times do
+200.times do
   Code.create! value: SecureRandom.hex(3)
 end
