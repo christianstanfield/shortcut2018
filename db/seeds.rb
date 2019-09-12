@@ -17,29 +17,30 @@ Ballot.delete_all
   Award.create! name: award_name
 end
 
-ROMEO    = 'The Untold Story of Romeo & Juliet'
-FUPA     = 'FUPA'
-ENOUGH   = 'ENOUGH | The Empowered Women of Korogocho'
-AKASHI   = 'AKASHI'
-NOISE    = 'The Noise of the Light'
-ONION    = 'Spanish Onion'
-HOUSE    = 'The House'
-PONYTAIL = 'Ponytail'
-BLUE     = 'Bliss Blue'
-ACTING   = 'Acting Her Age'
-HAMMER   = 'HAMMERSMITH: Hurdle of Dreams'
+ASYLUM  = 'Asylum'
+TINA    = 'Tina'
+STRONG  = 'Strong Independent Women'
+HOPE    = 'Hope is French'
+SILVER  = 'Silence is Silver'
+TOE     = 'Toe'
+TATTOO  = 'The Tattooed Heart'
+SWEPT   = 'Swept Away'
+WAVES   = 'Waves'
+COLLIDE = 'Collide'
+MOVING  = 'Moving On'
+YELLOW  = 'Mellow Yellow'
 
-[ROMEO, FUPA, ENOUGH, AKASHI, NOISE, ONION, HOUSE, PONYTAIL, BLUE, ACTING, HAMMER].each do |film_name|
+[ASYLUM, TINA, STRONG, HOPE, SILVER, TOE, TATTOO, SWEPT, WAVES, COLLIDE, MOVING, YELLOW].each do |film_name|
   Film.create! name: film_name
 end
 
 chicago = Award.find_by name: Award::CHICAGO
-[FUPA, PONYTAIL, BLUE, HAMMER].each do |film_name|
+[TOE, WAVES, COLLIDE, YELLOW].each do |film_name|
   Film.find_by(name: film_name).considered_awards << chicago
 end
 
 female = Award.find_by name: Award::FEMALE
-[AKASHI, HOUSE, PONYTAIL, BLUE, ACTING].each do |film_name|
+[TINA, STRONG, SWEPT, YELLOW].each do |film_name|
   Film.find_by(name: film_name).considered_awards << female
 end
 
